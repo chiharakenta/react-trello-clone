@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import {
   ChangeEventHandler,
   FC,
@@ -6,6 +7,22 @@ import {
   MouseEventHandler,
   useState
 } from 'react';
+
+const styles = {
+  inputArea: css`
+    margin-bottom: 10px;
+    width: 30%;
+    cursor: pointer;
+  `,
+  input: css`
+    width: 80px;
+    font-size: 1.1rem;
+    padding: 4px 6px;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+  `
+};
 
 export const TaskCardTitle: FC = () => {
   const [isClick, setIsClick] = useState(false);
@@ -29,11 +46,11 @@ export const TaskCardTitle: FC = () => {
   };
 
   return (
-    <div onClick={handleClick} className="taskCardTitleInputArea">
+    <div onClick={handleClick} css={styles.inputArea}>
       {isClick ? (
         <form onSubmit={handleSubmit}>
           <input
-            className="taskCardTitleInput"
+            css={styles.input}
             autoFocus
             type="text"
             onChange={handleChange}
