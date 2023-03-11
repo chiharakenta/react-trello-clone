@@ -25,10 +25,12 @@ export const TaskAddInput: FC<Props> = ({ inputText, setInputText, taskList, set
     event.preventDefault();
     if (!inputText) return;
     // カードを追加する
+    const timestamp = Date.now();
     setTaskList([
       ...taskList,
       {
-        id: Date.now(),
+        id: timestamp,
+        draggableId: `task-${timestamp}`,
         text: inputText
       }
     ]);

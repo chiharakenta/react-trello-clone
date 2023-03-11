@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Dispatch, FC, SetStateAction } from 'react';
+import { Draggable } from 'react-beautiful-dnd';
 import { TaskType } from './Task.type';
 
 const styles = {
@@ -29,20 +30,31 @@ interface Props {
   task: TaskType;
   taskList: Array<TaskType>;
   setTaskList: Dispatch<SetStateAction<Array<TaskType>>>;
+  draggableIndex: number;
 }
 
-export const Task: FC<Props> = ({ task, taskList, setTaskList }) => {
+export const Task: FC<Props> = ({ task, taskList, setTaskList, draggableIndex }) => {
   const handleDelete = (id: number) => {
     const newTaskList = taskList.filter((task) => task.id !== id);
     setTaskList(newTaskList);
   };
 
   return (
-    <div css={styles.taskBox}>
-      <p css={styles.taskText}>{task.text}</p>
-      <button css={styles.taskTrashButton} onClick={() => handleDelete(task.id)}>
-        <FontAwesomeIcon icon={faTrashCan} />
-      </button>
-    </div>
+    <Draggable index={draggableIndex} draggableId={task.draggableId}>
+      {(provided) => (
+        <div
+          css={styles.taskBox}
+          key={task.id}
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          <p css={styles.taskText}>{task.text}</p>
+          <button css={styles.taskTrashButton} onClick={() => handleDelete(task.id)}>
+            <FontAwesomeIcon icon={faTrashCan} />
+          </button>
+        </div>
+      )}
+    </Draggable>
   );
 };
