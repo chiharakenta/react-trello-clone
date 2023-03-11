@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ChangeEventHandler, Dispatch, FC, FormEventHandler, SetStateAction } from 'react';
 import { TaskType } from '../Task.type';
+import { v4 as uuidv4 } from 'uuid';
 
 const styles = {
   taskAddInput: css`
@@ -25,12 +26,12 @@ export const TaskAddInput: FC<Props> = ({ inputText, setInputText, taskList, set
     event.preventDefault();
     if (!inputText) return;
     // カードを追加する
-    const timestamp = Date.now();
+    const uuid = uuidv4();
     setTaskList([
       ...taskList,
       {
-        id: timestamp,
-        draggableId: `task-${timestamp}`,
+        id: uuid,
+        draggableId: `task-${uuid}`,
         text: inputText
       }
     ]);

@@ -34,7 +34,7 @@ interface Props {
 }
 
 export const Task: FC<Props> = ({ task, taskList, setTaskList, draggableIndex }) => {
-  const handleDelete = (id: number) => {
+  const handleDelete = (id: TaskType['id']) => {
     const newTaskList = taskList.filter((task) => task.id !== id);
     setTaskList(newTaskList);
   };
