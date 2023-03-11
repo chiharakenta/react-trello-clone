@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ChangeEventHandler, Dispatch, FC, FormEventHandler, SetStateAction } from 'react';
-import { Task } from '../Task.type';
+import { TaskType } from '../Task.type';
 
 const styles = {
   taskAddInput: css`
@@ -16,8 +16,8 @@ const styles = {
 interface Props {
   inputText: string;
   setInputText: Dispatch<SetStateAction<string>>;
-  taskList: Array<Task>;
-  setTaskList: Dispatch<SetStateAction<Array<Task>>>;
+  taskList: Array<TaskType>;
+  setTaskList: Dispatch<SetStateAction<Array<TaskType>>>;
 }
 
 export const TaskAddInput: FC<Props> = ({ inputText, setInputText, taskList, setTaskList }) => {

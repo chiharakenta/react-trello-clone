@@ -1,19 +1,18 @@
 import { FC } from 'react';
-import { Task } from './Task.type';
+import { Task } from './Task';
+import { TaskType } from './Task.type';
 
 interface Props {
   inputText: string;
-  taskList: Array<Task>;
+  taskList: Array<TaskType>;
 }
 
 export const Tasks: FC<Props> = ({ inputText, taskList }) => {
   return (
     <div>
-      <ul>
-        {taskList.map((task, index) => (
-          <li key={index}>{task.text}</li>
-        ))}
-      </ul>
+      {taskList.map((task, index) => (
+        <Task key={index} task={task} />
+      ))}
     </div>
   );
 };

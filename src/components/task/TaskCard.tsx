@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { FC, useState } from 'react';
 import { TaskCardDeleteButton } from './button/TaskCardDeleteButton';
 import { TaskAddInput } from './input/TaskAddInput';
-import { Task } from './Task.type';
+import { TaskType } from './Task.type';
 import { TaskCardTitle } from './TaskCardTitle';
 import { Tasks } from './Tasks';
 
@@ -18,7 +18,7 @@ const styles = {
 
 export const TaskCard: FC = () => {
   const [inputText, setInputText] = useState('');
-  const [taskList, setTaskList] = useState<Array<Task>>([]);
+  const [taskList, setTaskList] = useState<Array<TaskType>>([]);
 
   return (
     <div css={styles.taskCard}>
