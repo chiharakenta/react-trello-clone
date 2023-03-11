@@ -1,17 +1,17 @@
-import { FC } from 'react';
+import { Dispatch, FC, SetStateAction } from 'react';
 import { Task } from './Task';
 import { TaskType } from './Task.type';
 
 interface Props {
-  inputText: string;
   taskList: Array<TaskType>;
+  setTaskList: Dispatch<SetStateAction<Array<TaskType>>>;
 }
 
-export const Tasks: FC<Props> = ({ inputText, taskList }) => {
+export const Tasks: FC<Props> = ({ taskList, setTaskList }) => {
   return (
     <div>
-      {taskList.map((task, index) => (
-        <Task key={index} task={task} />
+      {taskList.map((task) => (
+        <Task key={task.id} task={task} taskList={taskList} setTaskList={setTaskList} />
       ))}
     </div>
   );

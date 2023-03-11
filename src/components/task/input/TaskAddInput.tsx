@@ -23,10 +23,12 @@ interface Props {
 export const TaskAddInput: FC<Props> = ({ inputText, setInputText, taskList, setTaskList }) => {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
+    if (!inputText) return;
     // カードを追加する
     setTaskList([
       ...taskList,
       {
+        id: taskList.length,
         text: inputText
       }
     ]);
