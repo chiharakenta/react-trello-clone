@@ -28,7 +28,7 @@ export const TaskAddInput: FC<Props> = ({ inputText, setInputText, taskList, set
     setTaskList([
       ...taskList,
       {
-        id: taskList.length,
+        id: Date.now(),
         text: inputText
       }
     ]);
