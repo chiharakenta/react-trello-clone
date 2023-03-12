@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { Dispatch, FC, SetStateAction, useState } from 'react';
+import { Draggable } from 'react-beautiful-dnd';
 import { TaskCardDeleteButton } from './button/TaskCardDeleteButton';
 import { TaskAddInput } from './input/TaskAddInput';
 import { TaskCardType, TaskType } from './Task.type';
@@ -21,32 +22,42 @@ const styles = {
 };
 
 interface Props {
-  taskCardId: TaskCardType['id'];
+  taskCard: TaskCardType;
   taskCardList: Array<TaskCardType>;
   setTaskCardList: Dispatch<SetStateAction<Array<TaskCardType>>>;
+  draggableIndex: number;
 }
 
-export const TaskCard: FC<Props> = ({ taskCardId, taskCardList, setTaskCardList }) => {
+export const TaskCard: FC<Props> = ({
+  taskCard,
+  taskCardList,
+  setTaskCardList,
+  draggableIndex
+}) => {
   const [inputText, setInputText] = useState('');
   const [taskList, setTaskList] = useState<Array<TaskType>>([]);
 
   return (
-    <div css={styles.taskCard}>
-      <div css={styles.taskCardTitleAndTaskCardDeleteButtonArea}>
-        <TaskCardTitle />
-        <TaskCardDeleteButton
-          taskCardId={taskCardId}
-          taskCardList={taskCardList}
-          setTaskCardList={setTaskCardList}
-        />
-      </div>
-      <TaskAddInput
-        inputText={inputText}
-        setInputText={setInputText}
-        taskList={taskList}
-        setTaskList={setTaskList}
-      />
-      <Tasks taskList={taskList} setTaskList={setTaskList} />
-    </div>
+    <Draggable index={draggableIndex} draggableId={taskCard.draggableId}>
+      {(provided) => (
+        <div css={styles.taskCard} ref={provided.innerRef} {...provided.draggableProps}>
+          <div css={styles.taskCardTitleAndTaskCardDeleteButtonArea} {...provided.dragHandleProps}>
+            <TaskCardTitle />
+            <TaskCardDeleteButton
+              taskCardId={taskCard.id}
+              taskCardList={taskCardList}
+              setTaskCardList={setTaskCardList}
+            />
+          </div>
+          <TaskAddInput
+            inputText={inputText}
+            setInputText={setInputText}
+            taskList={taskList}
+            setTaskList={setTaskList}
+          />
+          <Tasks taskList={taskList} setTaskList={setTaskList} />
+        </div>
+      )}
+    </Draggable>
   );
 };
