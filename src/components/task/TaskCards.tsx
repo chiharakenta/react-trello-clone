@@ -24,7 +24,12 @@ export const TaskCards: FC = () => {
   return (
     <div css={styles.taskCardsArea}>
       {taskCardList.map((taskCard) => (
-        <TaskCard key={taskCard.id} />
+        <TaskCard
+          key={taskCard.id}
+          taskCardId={taskCard.id}
+          taskCardList={taskCardList}
+          setTaskCardList={setTaskCardList}
+        />
       ))}
       <AddTaskCardButton taskCardList={taskCardList} setTaskCardList={setTaskCardList} />
     </div>
