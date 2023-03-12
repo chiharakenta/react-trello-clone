@@ -3,3 +3,9 @@ export interface TaskType {
   draggableId: string;
   text: string;
 }
+
+export interface TaskCardType {
+  id: string;
+  draggableId: string;
+  title?: string;
+}

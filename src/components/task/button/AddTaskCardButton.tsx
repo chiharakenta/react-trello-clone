@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
-import { FC } from 'react';
+import { Dispatch, FC, SetStateAction } from 'react';
+import { TaskCardType } from '../Task.type';
+import { v4 as uuidv4 } from 'uuid';
 
 const styles = {
   addTaskCardButtonArea: css`
@@ -21,10 +23,29 @@ const styles = {
   `
 };
 
-export const AddTaskCardButton: FC = () => {
+interface Props {
+  taskCardList: Array<TaskCardType>;
+  setTaskCardList: Dispatch<SetStateAction<Array<TaskCardType>>>;
+}
+
+export const AddTaskCardButton: FC<Props> = ({ taskCardList, setTaskCardList }) => {
+  const addTaskCard = () => {
+    /* タスクカードを追加する */
+    const uuid = uuidv4();
+    setTaskCardList([
+      ...taskCardList,
+      {
+        id: uuid,
+        draggableId: `item${uuid}`
+      }
+    ]);
+  };
+
   return (
     <div css={styles.addTaskCardButtonArea}>
-      <button css={styles.addTaskCardButton}>+</button>
+      <button css={styles.addTaskCardButton} onClick={addTaskCard}>
+        +
+      </button>
     </div>
   );
 };
