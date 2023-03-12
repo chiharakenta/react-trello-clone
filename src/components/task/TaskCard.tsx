@@ -13,6 +13,10 @@ const styles = {
     margin: 10px 1%;
     background-color: rgb(228, 228, 228);
     border-radius: 5px;
+  `,
+  taskCardTitleAndTaskCardDeleteButtonArea: css`
+    display: flex;
+    justify-content: space-between;
   `
 };
 
@@ -22,8 +26,10 @@ export const TaskCard: FC = () => {
 
   return (
     <div css={styles.taskCard}>
-      <TaskCardTitle />
-      <TaskCardDeleteButton />
+      <div css={styles.taskCardTitleAndTaskCardDeleteButtonArea}>
+        <TaskCardTitle />
+        <TaskCardDeleteButton />
+      </div>
       <TaskAddInput
         inputText={inputText}
         setInputText={setInputText}
