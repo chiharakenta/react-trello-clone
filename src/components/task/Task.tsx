@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Dispatch, FC, SetStateAction } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { TaskType } from './Task.type';
+import { TaskText } from './TaskText';
 
 const styles = {
   taskBox: css`
@@ -15,9 +16,6 @@ const styles = {
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 1px 1px 1px 1px rgb(75, 75, 75);
-  `,
-  taskText: css`
-    margin-left: 12px;
   `,
   taskTrashButton: css`
     margin-right: 8px;
@@ -49,7 +47,7 @@ export const Task: FC<Props> = ({ task, taskList, setTaskList, draggableIndex })
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <p css={styles.taskText}>{task.text}</p>
+          <TaskText task={task} taskList={taskList} setTaskList={setTaskList} />
           <button css={styles.taskTrashButton} onClick={() => handleDelete(task.id)}>
             <FontAwesomeIcon icon={faTrashCan} />
           </button>
